@@ -9,7 +9,11 @@ item_input = 0
 until item_input == exit
   puts "What is the sale price? (Enter done to quit)"
   item_input = gets.chomp
-  valid?(item_input) ? item_totals << item_input.to_f : nil
+  if valid?(item_input) == false
+    puts "Warning invalid number, please try again."
+  else
+    item_totals << item_input.to_f
+  end
 end
 
 puts "Here are your item prices: (Enter done when finished)"
@@ -30,5 +34,5 @@ if change_due > 0
 elsif change_due == 0
   puts "No change due"
 else change_due < 0
-  puts "Warning: Customer still owes #{change_due.abs}!"
+  puts "Warning: Customer still owes $#{"%.2f" % change_due.abs}!"
 end
