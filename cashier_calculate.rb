@@ -14,8 +14,10 @@ valid?(amount_tend)
 
 change_due = amount_tend.to_f - amount_due.to_f
 if change_due > 0
-  puts "Your change is: $#{"%.2f" % change_due}"
-  puts "Time of transaction: #{Time.now}"
+  puts "===Thank You!==="
+  puts "The total change due is $#{"%.2f" % change_due}"
+  puts Time.now.strftime("%m/%d/%Y %I:%M%p")
+  puts "================"
 elsif change_due == 0
   puts "No change due"
 else change_due < 0
