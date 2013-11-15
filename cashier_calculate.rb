@@ -1,18 +1,27 @@
 def valid?(num)
-  if !num.match(/\A\d+(\.\d{2})*\z/)
-    puts "Warning invalid number"
-  end
+  !!num.match(/\A\d+(\.\d{2})*\z/)
 end
 
-puts "What amount is due?"
-amount_due = gets.chomp
-valid?(amount_due)
+exit = "done"
+item_totals = []
+item_input = 0
 
-puts "What is the amount tendered?"
-amount_tend = gets.chomp
-valid?(amount_tend)
+until item_input == exit
+  puts "What is the sale price? (Enter done to quit)"
+  item_input = gets.chomp
+  valid?(item_input) ? item_totals << item_input.to_f : nil
+end
 
-change_due = amount_tend.to_f - amount_due.to_f
+puts "Here are your item prices: (Enter done when finished)"
+item_totals.each{|x| puts "$#{"%.2f" % x}"}
+item_totals = item_totals.inject(0){|sum, x| sum + x}
+puts "Here is your total: $#{"%.2f" % item_totals}"
+
+puts "Please enter the amount tendered: "
+amount_tendered = gets.chomp.to_f
+
+change_due = amount_tendered - item_totals
+
 if change_due > 0
   puts "===Thank You!==="
   puts "The total change due is $#{"%.2f" % change_due}"
